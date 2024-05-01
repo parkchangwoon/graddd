@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 작성폼</title>
+</head>
+
+<style>
+
+    .layout {
+        width : 500px;
+        margin : 0 auto;
+        margin-top : 40px;
+    }
+
+    .layout input {
+        width : 100%;
+        box-sizing : border-box
+    }
+
+    .layout textarea {
+        width : 100%;
+        margin-top : 10px;
+        min-height : 300px;
+    }
+
+</style>
+
+<body>
+<div class="layout">
+    <form action="/board/writepro" method="post" onsubmit="return validateForm()">
+        <input name="title" id="title" type="text" placeholder="제목 (최대 20자)">
+        <textarea name="content" id="content" placeholder="내용 (최대 40자)"></textarea>
+        <div id="titleCounter">0 / 20</div>
+        <div id="contentCounter">0 / 40</div>
+        <label for="rating">별점:</label>
+        <select name="rating" id="rating">
+            <option value="1">1점</option>
+            <option value="2">2점</option>
+            <option value="3">3점</option>
+            <option value="4">4점</option>
+            <option value="5">5점</option>
+        </select>
+        <button type="submit">작성</button>
+    </form>
+</div>
+<script>
+
+    document.getElementById("title").addEventListener("input", function() {
+        var titleLength = this.value.length;
+        document.getElementById("titleCounter").textContent = titleLength + " / 20";
+        if (titleLength > 20) {
+            this.value = this.value.substring(0, 20);
+            document.getElementById("titleCounter").textContent = "20 / 20";
+        }
+    });
+
+    document.getElementById("content").addEventListener("input", function() {
+        var contentLength = this.value.length;
+        document.getElementById("contentCounter").textContent = contentLength + " / 40";
+        if (contentLength > 40) {
+            this.value = this.value.substring(0, 40);
+            document.getElementById("contentCounter").textContent = "40 / 40";
+        }
+    });
+</script>
+
+</body>
+</html>
